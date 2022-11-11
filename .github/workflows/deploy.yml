@@ -14,9 +14,11 @@ jobs:
           key: ${{secrets.SSH_KEY}} # Private or public key of the server
           username: ${{ secrets.SSH_USERNAME }} # User of the server you want to ssh into
           script: |
-            git -C app pull || git clone https://github.com/KosolapovR/food_recipes_container.git app
-            cd ./app
-            git -C server pull || git clone git@github.com:KosolapovR/food-recipes-cms-be.git server
+            git -C app pull || git clone --recurse-submodules git@github.com:KosolapovR/food_recipes_container.git app
+            cd ./app/server
+            git fetch 
+            git merge
+            cd ../
             docker-compose build
             docker-compose up -d
             echo 'Deployment successful to digital ocean'
