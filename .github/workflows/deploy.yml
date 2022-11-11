@@ -19,6 +19,7 @@ jobs:
             git fetch 
             git merge
             cd ../
+            docker rmi $(docker images -f "dangling=true" -q)
             docker-compose build
             docker-compose up -d
             echo 'Deployment successful to digital ocean'
