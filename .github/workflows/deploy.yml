@@ -16,7 +16,7 @@ jobs:
           script: |
             git -C app pull || git clone https://github.com/KosolapovR/food_recipes_container.git app
             cd ./app
-            git -C server pull || git clone git@github.com:KosolapovR/food-recipes-cms-be.git server`
+            git -C server pull || git clone git@github.com:KosolapovR/food-recipes-cms-be.git server
             docker-compose build
             docker-compose up -d
             echo 'Deployment successful to digital ocean'
