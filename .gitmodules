@@ -1,3 +1,6 @@
 [submodule "server"]
 	path = server
 	url = https://github.com/KosolapovR/food-recipes-cms-be
+[submodule "cms"]
+	path = cms
+	url = https://github.com/KosolapovR/food-recipes-cms-fe
