@@ -44,6 +44,8 @@ services:
     command: ["npm", "run", "build"]
     volumes:
       - static_cms:/usr/cms/dist
+    environment:
+      - NODE_ENV=production
   nginx:
     restart: always
     build:
