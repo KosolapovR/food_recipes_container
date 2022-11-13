@@ -15,11 +15,8 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }} # User of the server you want to ssh into
           script: |
             git -C app pull || git clone --recurse-submodules git@github.com:KosolapovR/food_recipes_container.git app
-            cd ./app/server
-            git fetch && git merge
-            cd ../cms
-            git fetch && git merge
-            cd ../
+            cd ./app
+            git submodule update --recursive --remote
             docker rmi $(docker images -f "dangling=true" -q)
             docker-compose down && docker-compose build --no-cache && docker-compose up -d
             exit 0
