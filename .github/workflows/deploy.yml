@@ -20,5 +20,5 @@ jobs:
             [[ ! -f ./cms/package.json ]] && git submodule update --init --recursive
             docker-compose down
             docker rmi $(docker images -f "dangling=true" -q)
-            docker-compose build --no-cache && docker-compose up -d
+            docker-compose build --no-cache && DOCKER_CLIENT_TIMEOUT=600 COMPOSE_HTTP_TIMEOUT=600 docker-compose up -d
             exit 0
