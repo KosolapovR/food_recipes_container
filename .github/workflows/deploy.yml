@@ -16,7 +16,7 @@ jobs:
           script: |
             git -C app pull || git clone --recurse-submodules git@github.com:KosolapovR/food_recipes_container.git app
             cd ./app
-            git submodule update --recursive --remote
+            git submodule update --recursive --remote || git submodule update --init --recursive
             docker rmi $(docker images -f "dangling=true" -q)
             docker-compose down && docker-compose build --no-cache && docker-compose up -d
             exit 0
