@@ -17,6 +17,8 @@ jobs:
             git -C app pull || git clone --recurse-submodules git@github.com:KosolapovR/food_recipes_container.git app
             cd ./app/server
             git fetch && git merge
+            cd ../cms
+            git fetch && git merge
             cd ../
             docker rmi $(docker images -f "dangling=true" -q)
             docker-compose down && docker-compose build --no-cache && docker-compose up -d
