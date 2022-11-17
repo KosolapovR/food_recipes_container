@@ -18,7 +18,7 @@ services:
   nodeapp:
     depends_on:
       - mysqldb
-    build: ./server
+    image: kosolapovr/food-recipes-be:main
     command: ["./wait-for-it.sh", "mysqldb:${MYSQLDB_DOCKER_PORT}", "--", "npm", "run", "start"]
 
     restart: unless-stopped
@@ -38,8 +38,7 @@ services:
   cms:
     depends_on:
       - nodeapp
-    build:
-      context: ./cms
+    image: kosolapovr/food-recipes-cms-fe:main
     restart: on-failure
     command: ["npm", "run", "build"]
     volumes:
