@@ -45,12 +45,22 @@ services:
       - static_cms:/usr/cms/dist
     environment:
       - NODE_ENV=production
+  web:
+    depends_on:
+      - nodeapp
+    image: kosolapovr/food-recipes-web:main
+    restart: on-failure
+    ports:
+      - $WEB_APP_PORT:$WEB_APP_PORT
+    environment:
+      - NODE_ENV=production
   nginx:
     restart: always
     build:
       context: ./nginx
     depends_on:
       - cms
+      - web
     ports:
       - "80:80"
     volumes:
