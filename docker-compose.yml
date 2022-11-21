@@ -19,7 +19,7 @@ services:
     depends_on:
       - mysqldb
     image: kosolapovr/food-recipes-be:main
-    command: ["./wait-for-it.sh", "mysqldb:${MYSQLDB_DOCKER_PORT}", "--", "npm", "run", "start"]
+    command: ["./wait-for-it.sh", "mysqldb:${MYSQLDB_DOCKER_PORT}", "--strict", "--", "npm", "run", "start"]
 
     restart: unless-stopped
     env_file: ./.env
@@ -40,7 +40,7 @@ services:
       - nodeapp
     image: kosolapovr/food-recipes-cms-fe:main
     restart: on-failure
-    command: ["npm", "run", "build"]
+    command: [ "./wait-for-it.sh", "nodeapp:${NODE_DOCKER_PORT}", "--strict", "--", "npm", "run", "build" ]
     volumes:
       - static_cms:/usr/cms/dist
     environment:
@@ -50,6 +50,7 @@ services:
       - nodeapp
     image: kosolapovr/food-recipes-web:main
     restart: on-failure
+    command: [ "./wait-for-it.sh", "nodeapp:${NODE_DOCKER_PORT}", "--strict", "--", "npx", "cross-env", "PORT=${WEB_APP_PORT}", "node", "server.js" ]
     ports:
       - $WEB_APP_PORT:$WEB_APP_PORT
     environment:
@@ -64,7 +65,6 @@ services:
     ports:
       - "80:80"
     volumes:
-      - ./src/root:/etc/nginx/html
       - static_cms:/etc/nginx/html/cms
 volumes:
   db:
