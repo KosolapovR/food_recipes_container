@@ -1,0 +1,19 @@
+{
+  "name": "food_recipes_container",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KosolapovR/food_recipes_container.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KosolapovR/food_recipes_container/issues"
+  },
+  "homepage": "https://github.com/KosolapovR/food_recipes_container#readme"
+}
