@@ -18,6 +18,7 @@ jobs:
             cd ./app
             docker-compose down
             docker rmi $(docker images | grep 'kosolapovr')
+            docker rmi $(docker images | grep 'app')
             docker rmi $(docker images -f "dangling=true" -q)
             docker-compose up -d
             exit 0
